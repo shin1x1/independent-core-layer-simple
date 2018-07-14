@@ -3,8 +3,7 @@ install:
 	docker-compose run composer install -d cakephp --ignore-platform-reqs --no-scripts
 	docker-compose run composer install -d laravel
 	cp -a ./laravel/.env.example ./laravel/.env
-	docker-compose run php-fpm ./laravel/artisan migrate
-	docker-compose run php-fpm ./laravel/artisan db:seed
+	docker-compose run php-fpm ./laravel/artisan migrate --seed
 .PHONY: install
 	
 test:
