@@ -9,4 +9,3 @@ final class DomainRuleException extends Exception
 {
 
 }
-
