@@ -38,3 +38,11 @@ services:
       - ./docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+
+  phpstan:
+    image: phpstan/phpstan
+    hostname: phpstan
+    container_name: phpstan
+    volumes:
+    - .:/var/www/html
+    working_dir: /var/www/html

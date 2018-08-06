@@ -27,3 +27,15 @@ up:
 .PHONY: down
 down:
 	docker-compose down
+
+.PHONY: phpcs
+phpcs:
+	docker-compose run --rm php-cli ./vendor/bin/phpcs --standard=/var/www/html/ruleset.xml
+
+.PHONY: phpcbf
+phpcbf:
+	docker-compose run --rm php-cli ./vendor/bin/phpcbf --standard=/var/www/html/ruleset.xml
+
+.PHONY: phpstan
+phpstan:
+	docker-compose run --rm phpstan analyze --level 7 core

@@ -10,14 +10,12 @@ $ cd this_repo
 $ make install
 
 $ make test
-docker-compose run php-fpm ./vendor/bin/phpunit
-Starting independent-core-layer-simple_db-test_1 ... done
-Starting independent-core-layer-simple_db_1      ... done
+docker-compose run --rm php-cli ./vendor/bin/phpunit
 PHPUnit 7.2.6 by Sebastian Bergmann and contributors.
 
 ..                                                                  2 / 2 (100%)
 
-Time: 207 ms, Memory: 4.00MB
+Time: 20 ms, Memory: 4.00MB
 
 OK (2 tests, 3 assertions)
 ```
@@ -26,7 +24,8 @@ OK (2 tests, 3 assertions)
 
 ```
 ├── Makefile
-├── cakephp        # Service layer with CakePHP
+├── cakephp2       # Service layer with CakePHP2
+├── cakephp3       # Service layer with CakePHP3
 ├── composer.json
 ├── composer.lock 
 ├── core           # Core layer
