@@ -1,0 +1,91 @@
+# User specific & automatically generated files #
+#################################################
+/app/Vendor
+/lib/Cake/Console/Templates/skel/tmp/
+/plugins
+/vendors
+/build
+/dist
+/tags
+*.mo
+
+/app/tmp/*
+!/app/tmp/cache/models/empty
+!/app/tmp/cache/persistent/empty
+!/app/tmp/cache/views/empty
+!/app/tmp/logs/empty
+!/app/tmp/sessions/empty
+!/app/tmp/tests/empty
+
+# HtmlCache
+/webroot/cache/*
+!/webroot/cache/
+!/webroot/cache/empty
+
+# Plugin (統合不可)
+/Plugin/BaseTestSuite
+/Plugin/Core
+/Plugin/Coupon
+/Plugin/ItemCategory
+/Plugin/PaymentCarrier
+/Plugin/Review
+/Plugin/Sale
+/Plugin/ShippingFee
+
+# Plugin (作業完了後、統合予定)
+/Plugin/DashboardCard
+/Plugin/ItemLabel
+
+# Vendor
+/Vendor/*
+!/Vendor/cb
+!/Vendor/econ
+!/Vendor/sln
+!/Vendor/smbcfs
+
+# Locale
+/Locale/cake_console.pot
+/Locale/cake_dev.pot
+/Locale/cake_pdf.pot
+/Locale/cakepdf.pot
+/Locale/eng/LC_MESSAGES/default.po~
+
+# composer
+/composer.phar
+
+# node
+/node_modules/*
+!/node_modules/
+/Plugin/*/node_modules/*
+!/Plugin/*/node_modules/
+
+# ruby
+/.bundle/*
+
+# デザインマーケット（BASEオフィシャル）作業用
+/webroot/theme-base-official/*
+
+# PHPUnit Code Coverage
+/webroot/coverage
+
+# SonarQube
+/.scannerwork/
+
+# IDE and editor specific files #
+#################################
+/nbproject
+.idea
+/.project
+/.buildpath
+/.settings/
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
