@@ -116,3 +116,32 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+// CakePHP3 の ORM を使うための設定を行う
+define('CONFIG_CAKEPHP3', '../../../cakephp3/config/');
+
+$dotenv = new \josegonzalez\Dotenv\Loader([CONFIG_CAKEPHP3 . '.env']);
+$dotenv->parse()
+	->putenv()
+	->toEnv()
+	->toServer();
+
+try {
+	\Cake\Core\Configure::config(
+		'default',
+		new \Cake\Core\Configure\Engine\PhpConfig(CONFIG_CAKEPHP3)
+	);
+	\Cake\Core\Configure::load('app', 'default', false);
+} catch (\Exception $e) {
+	exit($e->getMessage() . "\n");
+}
+
+\Cake\Datasource\ConnectionManager::setConfig(
+	'default',
+	\Cake\Core\Configure::read('Datasources.default')
+);
+
+\Cake\Cache\Cache::setConfig(
+	'_cake_model_',
+	\Cake\Core\Configure::read('Cache._cake_model_')
+);
