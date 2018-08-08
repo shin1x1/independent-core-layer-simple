@@ -7,7 +7,7 @@ jobs:
       - checkout
 
       - run: docker-compose -v
-      - run: docker-compose run php-fpm php -v
+      - run: docker-compose run php-cli php -v
 
       - run: make install
       - run: make phpstan

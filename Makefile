@@ -1,26 +1,41 @@
-install:
-	docker-compose run composer install
-	docker-compose run composer install -d cakephp --ignore-platform-reqs --no-scripts
-	docker-compose run composer install -d laravel
-	cp -a ./laravel/.env.example ./laravel/.env
 .PHONY: install
-	
-test:
-	docker-compose run php-fpm ./vendor/bin/phpunit
+install:
+	docker-compose run --rm php-cli composer install
+	docker-compose run --rm php-cli composer install -d cakephp2
+	docker-compose run --rm php-cli composer install -d cakephp3 --ignore-platform-reqs --no-scripts
+	docker-compose run --rm php-cli composer install -d laravel
+	docker-compose run --rm php-cli cp -a ./cakephp3/config/.env.default ./cakephp3/config/.env
+	docker-compose run --rm php-cli cp -a ./laravel/.env.example ./laravel/.env
+	docker-compose run --rm php-cli sh -c 'cd laravel; php artisan key:generate'
+	docker-compose run --rm php-cli chmod -R a+w ./laravel/storage ./laravel/bootstrap/cache
+	docker-compose run --rm php-cli chmod -R a+w ./cakephp2/app/tmp
+
 .PHONY: test
+test:
+	docker-compose run --rm php-cli ./vendor/bin/phpunit
 
-phpcs:
-	docker-compose run php-fpm ./vendor/bin/phpcs --standard=/var/www/html/ruleset.xml
-.PHONY: phpcs
-
-phpcbf:
-	docker-compose run php-fpm ./vendor/bin/phpcbf --standard=/var/www/html/ruleset.xml
-.PHONY: phpcbf
-
-clean:
+.PHONY: db_setup
+db_setup:
+	docker-compose up -d web
+	docker exec -it web sh -c 'cd laravel; php artisan migrate; php artisan db:seed'
 	docker-compose down
-.PHONY: clean
 
-phpstan:
-	docker-compose run phpstan analyze --level 7 core
+.PHONY: up
+up:
+	docker-compose up -d web
+
+.PHONY: down
+down:
+	docker-compose down
+
+.PHONY: phpcs
+phpcs:
+	docker-compose run --rm php-cli ./vendor/bin/phpcs --standard=/var/www/html/ruleset.xml
+
+.PHONY: phpcbf
+phpcbf:
+	docker-compose run --rm php-cli ./vendor/bin/phpcbf --standard=/var/www/html/ruleset.xml
+
 .PHONY: phpstan
+phpstan:
+	docker-compose run --rm phpstan analyze --level 7 core
